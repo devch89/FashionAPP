@@ -23,11 +23,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.cyberwalker.fashionstore.Liked.LikedScreen
+import com.cyberwalker.fashionstore.Liked.LikedScreenActions
 import com.cyberwalker.fashionstore.detail.DetailScreen
 import com.cyberwalker.fashionstore.detail.DetailScreenActions
 import com.cyberwalker.fashionstore.dump.animatedComposable
-import com.cyberwalker.fashionstore.Liked.LikedScreen
-import com.cyberwalker.fashionstore.Liked.LikedScreenActions
 import com.cyberwalker.fashionstore.home.HomeScreen
 import com.cyberwalker.fashionstore.home.HomeScreenActions
 import com.cyberwalker.fashionstore.login.SignInScreen
@@ -151,11 +151,11 @@ class NavActions(private val navController: NavController) {
             }
         }
     }
-    fun navigateFromHomeToLiked(actions: ProfileScreenActions){
-        when(actions){
-            ProfileScreenActions.LoadProfile -> {
-                navController.navigate(Screen.Profile.name)
-            }
-        }
-    }
+//    fun navigateFromHomeToLiked(actions: ProfileScreenActions){
+//        when(actions){
+//            ProfileScreenActions.LoadProfile -> {
+//                navController.navigate(Screen.Profile.name)
+//            }
+//        }
+//    }
 }

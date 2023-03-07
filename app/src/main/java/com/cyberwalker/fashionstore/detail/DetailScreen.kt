@@ -56,10 +56,12 @@ fun DetailScreen(
     Scaffold(
         scaffoldState = scaffoldState
     ) { innerPadding ->
-        DetailScreenContent(modifier = Modifier
-            .padding(innerPadding)
-            .scrollable(state = scrollState, orientation = Orientation.Vertical),
-            onAction = onAction)
+        DetailScreenContent(
+            modifier = Modifier
+                .padding(innerPadding)
+                .scrollable(state = scrollState, orientation = Orientation.Vertical),
+            onAction = onAction
+        )
     }
 
 
@@ -95,7 +97,10 @@ private fun DetailScreenContent(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 modifier = Modifier
                     .size(45.dp)
@@ -110,31 +115,37 @@ private fun DetailScreenContent(
                 .size(45.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(color = sizeGreen, shape = RoundedCornerShape(12.dp))
-                .clickable { }, contentAlignment = Alignment.Center) {
+                .clickable { }, contentAlignment = Alignment.Center
+            ) {
                 Text(text = "M", style = MaterialTheme.typography.medium_18_bold.copy(dark))
             }
             Box(modifier = Modifier
                 .size(56.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(color = highlight, shape = RoundedCornerShape(12.dp))
-                .clickable { }, contentAlignment = Alignment.Center) {
-                Text(text = "L", style = MaterialTheme.typography.medium_18_bold.copy(color = Color.White))
+                .clickable { }, contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "L",
+                    style = MaterialTheme.typography.medium_18_bold.copy(color = Color.White)
+                )
             }
             Box(modifier = Modifier
                 .size(45.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(color = sizeGreen, shape = RoundedCornerShape(12.dp))
-                .clickable { }, contentAlignment = Alignment.Center) {
+                .clickable { }, contentAlignment = Alignment.Center
+            ) {
                 Text(text = "XL", style = MaterialTheme.typography.medium_18_bold.copy(dark))
             }
         }
         Spacer(modifier = Modifier.weight(1F))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-           Column {
-               Text(text = "Price", style = MaterialTheme.typography.caption.copy(gray))
-               Spacer(modifier = Modifier.size(4.dp))
-               Text(text = "₹1284", style = MaterialTheme.typography.medium_18)
-           }
+            Column {
+                Text(text = "Price", style = MaterialTheme.typography.caption.copy(gray))
+                Spacer(modifier = Modifier.size(4.dp))
+                Text(text = "₹1284", style = MaterialTheme.typography.medium_18)
+            }
             Button(
                 onClick = { },
                 colors = ButtonDefaults.buttonColors(backgroundColor = highlight),

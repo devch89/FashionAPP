@@ -35,7 +35,6 @@ import androidx.navigation.NavHostController
 import com.cyberwalker.fashionstore.R
 import com.cyberwalker.fashionstore.dump.BottomNav
 import com.cyberwalker.fashionstore.dump.vertical
-import com.cyberwalker.fashionstore.navigation.Screen
 import com.cyberwalker.fashionstore.ui.theme.*
 
 @Composable
@@ -201,7 +200,7 @@ private fun TabRow() {
         Text(text = "Belt",
             style = MaterialTheme.typography.medium_18,
             modifier = Modifier
-                .clickable{
+                .clickable {
                     println("Clicked belt")
                 })
         Spacer(modifier = Modifier.size(24.dp))
@@ -217,16 +216,16 @@ private fun TabRow() {
             Text(text = "Clothes",
                 style = MaterialTheme.typography.medium_18,
                 color = Color.White,
-            modifier = Modifier
-                .clickable{
-                    println("Clicked Clothes")
-                })
+                modifier = Modifier
+                    .clickable {
+                        println("Clicked Clothes")
+                    })
         }
         Spacer(modifier = Modifier.size(32.dp))
         Text(text = "Shoes",
             style = MaterialTheme.typography.medium_18,
             modifier = Modifier
-                .clickable{
+                .clickable {
                     println("Clicked Shoes")
                 }
         )
@@ -256,7 +255,8 @@ private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(end = 8.dp, top = 8.dp).clickable {  }
+                        .padding(end = 8.dp, top = 8.dp)
+                        .clickable { }
                 )
             }
             Spacer(modifier = Modifier.size(8.dp))
@@ -285,7 +285,8 @@ private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(end = 8.dp, top = 8.dp).clickable {  }
+                        .padding(end = 8.dp, top = 8.dp)
+                        .clickable { }
                 )
             }
             Spacer(modifier = Modifier.size(8.dp))
@@ -316,7 +317,8 @@ private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(end = 8.dp, top = 8.dp).clickable {  }
+                        .padding(end = 8.dp, top = 8.dp)
+                        .clickable { }
                 )
             }
             Spacer(modifier = Modifier.size(8.dp))
@@ -345,7 +347,8 @@ private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(end = 8.dp, top = 8.dp).clickable {  }
+                        .padding(end = 8.dp, top = 8.dp)
+                        .clickable { }
                 )
             }
             Spacer(modifier = Modifier.size(8.dp))
@@ -362,7 +365,6 @@ private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
 sealed class HomeScreenActions {
     object Details : HomeScreenActions()
 }
-
 
 
 //sealed class LikedScreenActions {

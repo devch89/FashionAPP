@@ -3,7 +3,6 @@ package com.cyberwalker.fashionstore.login
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -31,14 +30,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SignInScreen(
-    navController : NavController,
+    navController: NavController,
     viewModel: SignInViewModel = hiltViewModel(),
     onAction: (actions: SignInScreenActions) -> Unit
 ) {
 
     val googleSignInState = viewModel.googleState.value
-
-
 
 
     val launcher =
@@ -59,14 +56,16 @@ fun SignInScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val state = viewModel.signInState.collectAsState(initial = null)
+    val signUpState = viewModel.signUpState.collectAsState(initial = null)
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = 30.dp, end = 30.dp),
-        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
         Text(
             text = "Enter your credential's to register",
             fontWeight = FontWeight.Medium,
@@ -129,17 +128,27 @@ fun SignInScreen(
             }
 
         }
-        Text(
+        Button(
+            onClick = {
+                scope.launch {
+                    viewModel.createUser(email, password)
+                }
+            },
             modifier = Modifier
-                .padding(15.dp)
-                .clickable {
-                    /*TODO*/
-                },
-            text = "New User? Sign Up ",
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
-            fontFamily = poppinsFamily
-        )
+                .fillMaxWidth()
+                .padding(top = 20.dp, start = 30.dp, end = 30.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Black, contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(15.dp)
+        ) {
+            Text(text = "Sign Up", color = Color.White, modifier = Modifier.padding(7.dp))
+        }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            if (signUpState.value?.isLoading == true) {
+                CircularProgressIndicator()
+            }
+        }
         Text(text = "or connect with", fontWeight = FontWeight.Medium, color = Color.Gray)
         Row(
             modifier = Modifier
@@ -148,7 +157,7 @@ fun SignInScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = {
-                val gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(ServerClient)
                     .requestEmail()
                     .build()
@@ -183,6 +192,25 @@ fun SignInScreen(
                 }
             }
 
+            LaunchedEffect(key1 = signUpState.value?.isSuccess) {
+                scope.launch {
+                    if (state.value?.isSuccess?.isNotEmpty() == true) {
+                        val success = signUpState.value?.isSuccess
+                        Toast.makeText(context, "Sign Up Success", Toast.LENGTH_LONG).show()
+                        onAction(SignInScreenActions.LoadHome)
+                    }
+                }
+            }
+
+            LaunchedEffect(key1 = signUpState.value?.isError) {
+                scope.launch {
+                    if (state.value?.isError?.isNotEmpty() == true) {
+                        val error = signUpState.value?.isError
+                        Toast.makeText(context, "${error}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
             LaunchedEffect(key1 = googleSignInState.success) {
                 scope.launch {
                     if (googleSignInState.success != null) {
@@ -194,7 +222,7 @@ fun SignInScreen(
 
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            if (googleSignInState.loading){
+            if (googleSignInState.loading) {
                 CircularProgressIndicator()
             }
         }
