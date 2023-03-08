@@ -30,6 +30,8 @@ import com.cyberwalker.fashionstore.detail.DetailScreenActions
 import com.cyberwalker.fashionstore.dump.animatedComposable
 import com.cyberwalker.fashionstore.home.HomeScreen
 import com.cyberwalker.fashionstore.home.HomeScreenActions
+import com.cyberwalker.fashionstore.items.ItemsScreen
+import com.cyberwalker.fashionstore.items.ItemsScreenActions
 import com.cyberwalker.fashionstore.login.SignInScreen
 import com.cyberwalker.fashionstore.login.SignInScreenActions
 import com.cyberwalker.fashionstore.profile.ProfileScreen
@@ -49,6 +51,7 @@ sealed class Screen(val name: String, val route: String) {
     object Search : Screen("search", "search")
     object Liked : Screen("liked", "liked")
     object Profile : Screen("profile", "profile")
+    object Items : Screen("items", "items")
 
 }
 
@@ -93,6 +96,10 @@ fun FashionNavGraph(
         animatedComposable(Screen.Profile.route) {
             ProfileScreen(onAction = actions::navigateToProfile,navController = navController)
         }
+
+        animatedComposable(Screen.Items.route) {
+            ItemsScreen(onAction = actions::navigateFromItems,navController = navController)
+        }
     }
 }
 
@@ -116,15 +123,34 @@ class NavActions(private val navController: NavController) {
 
     fun navigateFromHome(actions: HomeScreenActions) {
         when (actions) {
+            HomeScreenActions.Items -> {
+                navController.navigate(Screen.Items.name)
+            }
+
             HomeScreenActions.Details -> {
                 navController.navigate(Screen.Detail.name)
             }
+
+
         }
     }
 
     fun navigateFromDetails(actions: DetailScreenActions) {
         when(actions) {
             DetailScreenActions.Back -> navController.popBackStack()
+        }
+    }
+
+    fun navigateFromItems(actions: ItemsScreenActions) {
+        when(actions) {
+            ItemsScreenActions.Back -> {
+
+                navController.popBackStack()
+            }
+
+            ItemsScreenActions.Details -> {
+                navController.navigate(Screen.Detail.name)
+            }
         }
     }
 
@@ -151,11 +177,4 @@ class NavActions(private val navController: NavController) {
             }
         }
     }
-//    fun navigateFromHomeToLiked(actions: ProfileScreenActions){
-//        when(actions){
-//            ProfileScreenActions.LoadProfile -> {
-//                navController.navigate(Screen.Profile.name)
-//            }
-//        }
-//    }
 }

@@ -115,7 +115,7 @@ private fun HomeScreenContent(
             Image(modifier = Modifier
                 .size(50.dp)
                 .clickable {
-                    onAction(HomeScreenActions.Details)
+                    onAction(HomeScreenActions.Items)
                 }
                 .padding(16.dp),
                 painter = painterResource(id = R.drawable.arrow_right),
@@ -151,7 +151,7 @@ private fun HomeScreenContent(
             Image(modifier = Modifier
                 .size(50.dp)
                 .clickable {
-                    onAction(HomeScreenActions.Details)
+                    onAction(HomeScreenActions.Items)
                 }
                 .padding(16.dp),
                 painter = painterResource(id = R.drawable.arrow_right),
@@ -363,10 +363,6 @@ private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
 
 
 sealed class HomeScreenActions {
+    object Items : HomeScreenActions()
     object Details : HomeScreenActions()
 }
-
-
-//sealed class LikedScreenActions {
-//    object Liked: LikedScreenActions()
-//}
